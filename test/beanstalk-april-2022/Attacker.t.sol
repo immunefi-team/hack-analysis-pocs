@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import "../../src/beanstalk-april-2022/Attacker.sol";
 
-contract AttackerTest is Test {
+contract BeanAttackerTest is Test {
     function setUp() public {
         vm.createSelectFork("mainnet", 14595905);
         vm.deal(address(this), 70 ether);
