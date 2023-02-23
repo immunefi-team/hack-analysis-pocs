@@ -9,7 +9,7 @@ contract BinanceAttackerTest is Test {
 
     CraftPayload public craftPayload;
 
-    address inputAddress = 0xA9462F1880d0671aC9Cb7c3b411C484cdc624E94; // random Address
+    address inputAddress = makeAddr("Alice"); // random Address
 
     function setUp() public {
 
@@ -17,6 +17,7 @@ contract BinanceAttackerTest is Test {
 
     function testRun()public {
         craftPayload = new CraftPayload();
+        console.log("Address = ", inputAddress);
         address tokenAddress = address(0);
         uint256 amount = 1_000_000*1e18;
         address recipient = inputAddress;
