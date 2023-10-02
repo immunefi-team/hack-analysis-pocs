@@ -3,9 +3,8 @@ module CheckProof
 go 1.19
 
 require (
-	github.com/tendermint/go-amino v0.16.0
 	github.com/tendermint/iavl v0.12.0
-	github.com/tendermint/tendermint v0.31.11
+	github.com/tendermint/tendermint v0.31.12
 )
 
 require (
@@ -21,6 +20,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
+	github.com/tendermint/go-amino v0.16.0 // indirect
 	go.etcd.io/bbolt v1.3.7 // indirect
 	golang.org/x/sys v0.4.0 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
